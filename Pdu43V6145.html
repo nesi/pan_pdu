@@ -1,0 +1,763 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Pdu43V6145
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!Pdu43V6145.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (P)</a> &raquo;
+    
+    
+    <span class="title">Pdu43V6145</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Pdu43V6145
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Pdu43V6145</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">rlib/pdu43V6145.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Queries for IBM 43V6145 PDU, which some queries need to be done through XML
+query. Some data is available using SNMP.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_usage_snmp-class_method" title="current_usage_snmp (class method)">+ (Float) <strong>current_usage_snmp</strong>(hostname, community) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Class level function to retrieve the current power being used via SNMP,
+rather than A web XML request.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accumulated_power_used-instance_method" title="#accumulated_power_used (instance method)">- (Float) <strong>accumulated_power_used</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Power used since the PDU was last reset (generally this is since the power
+was first turned on).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_power_usage-instance_method" title="#current_power_usage (instance method)">- (Float) <strong>current_power_usage</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>retrieve the current power usage (point in time).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_temperature-instance_method" title="#current_temperature (instance method)">- (Float) <strong>current_temperature</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>retrieve the current temperature from the sensor attached to the PDU
+(assuming there is one).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Pdu43V6145) <strong>initialize</strong>(pdu_hostname, auth_key, mode = :power) </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a Pdu43V6145 class.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Pdu43V6145 (class)">Pdu43V6145</a></span></tt>) <strong>initialize</strong>(pdu_hostname, auth_key, mode = :power) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a Pdu43V6145 class</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>pdu_hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The pdu we will be querying</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>auth_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The pdu&#39;s web password</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rlib/pdu43V6145.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_pdu_hostname'>pdu_hostname</span><span class='comma'>,</span> <span class='id identifier rubyid_auth_key'>auth_key</span><span class='comma'>,</span> <span class='id identifier rubyid_mode'>mode</span> <span class='op'>=</span> <span class='symbol'>:power</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_wb'>wb</span> <span class='op'>=</span> <span class='const'>WebBrowser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_pdu_hostname'>pdu_hostname</span><span class='rparen'>)</span>
+
+  <span class='kw'>begin</span>
+  <span class='comment'>#Login to PDU
+</span>    <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_http_session'>http_session</span><span class='lparen'>(</span><span class='int'>80</span><span class='rparen'>)</span> <span class='kw'>do</span> 
+      <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_post_page'>post_page</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>login.htm</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>User</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ADMIN</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Password</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_auth_key'>auth_key</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>B1</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Login</span><span class='tstring_end'>&#39;</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'>#Fetch the XML data from the PDU
+</span>    <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_http_session'>http_session</span><span class='lparen'>(</span><span class='int'>80</span><span class='rparen'>)</span> <span class='kw'>do</span>
+      <span class='kw'>if</span> <span class='id identifier rubyid_mode'>mode</span> <span class='op'>==</span> <span class='symbol'>:power</span>
+        <span class='ivar'>@env</span> <span class='op'>=</span> <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_get_page'>get_page</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>ibmframe_4.xml</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+      <span class='kw'>else</span> <span class='comment'>#Then temperature
+</span>        <span class='ivar'>@env</span> <span class='op'>=</span> <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_get_page'>get_page</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>env_status.xml</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='ivar'>@xml</span> <span class='op'>=</span> <span class='const'>Nokogiri</span><span class='op'>::</span><span class='const'>XML</span><span class='lparen'>(</span><span class='ivar'>@env</span><span class='rparen'>)</span>
+
+    <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_http_session'>http_session</span><span class='lparen'>(</span><span class='int'>80</span><span class='rparen'>)</span> <span class='kw'>do</span> 
+      <span class='id identifier rubyid_wb'>wb</span><span class='period'>.</span><span class='id identifier rubyid_get_page'>get_page</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>logout_wait.htm</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_error'>error</span>
+    <span class='gvar'>$stderr</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Pdu43V6145.new(&#39;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_pdu_hostname'>pdu_hostname</span><span class='embexpr_end'>}</span><span class='tstring_content'>&#39;, key) error =&gt; </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_error'>error</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="current_usage_snmp-class_method">
+  
+    + (<tt>Float</tt>) <strong>current_usage_snmp</strong>(hostname, community) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Class level function to retrieve the current power being used via SNMP,
+rather than A web XML request</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The pdu&#39;s hostname</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>community</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The pdu&#39;s snmp read community string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Power being used in KW</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rlib/pdu43V6145.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_usage_snmp'>current_usage_snmp</span><span class='lparen'>(</span><span class='id identifier rubyid_hostname'>hostname</span><span class='comma'>,</span> <span class='id identifier rubyid_community'>community</span><span class='rparen'>)</span>
+  <span class='comment'>#SNMPv2-SMI::enterprises
+</span>  <span class='id identifier rubyid_power_usage_amps'>power_usage_amps</span> <span class='op'>=</span> <span class='float'>0.0</span>
+  <span class='const'>SNMP</span><span class='op'>::</span><span class='const'>Manager</span><span class='period'>.</span><span class='id identifier rubyid_snmp_walk'>snmp_walk</span><span class='lparen'>(</span><span class='id identifier rubyid_hostname'>hostname</span><span class='comma'>,</span> <span class='id identifier rubyid_community'>community</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.3.6.1.4.1.2.6.223.8.2.2.1.7</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='comment'>#Total power used, since last PDU reset
+</span>    <span class='id identifier rubyid_power_usage_amps'>power_usage_amps</span> <span class='op'>+=</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='comment'>#Should be just the twelve responses
+</span>  <span class='kw'>end</span>
+  <span class='kw'>return</span> <span class='lparen'>(</span><span class='id identifier rubyid_power_usage_amps'>power_usage_amps</span> <span class='op'>*</span> <span class='float'>0.230</span><span class='rparen'>)</span><span class='op'>/</span><span class='float'>1000.0</span> <span class='comment'>#In VA/1000 Apparent Power KW
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="accumulated_power_used-instance_method">
+  
+    - (<tt>Float</tt>) <strong>accumulated_power_used</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Power used since the PDU was last reset (generally this is since the power
+was first turned on)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>KWHours</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rlib/pdu43V6145.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_accumulated_power_used'>accumulated_power_used</span>
+  <span class='id identifier rubyid_power_total'>power_total</span> <span class='op'>=</span> <span class='float'>0.0</span>
+
+  <span class='kw'>begin</span>
+    <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>3</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ipdp'>ipdp</span><span class='op'>|</span>
+      <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_eg'>eg</span><span class='op'>|</span>
+        <span class='id identifier rubyid_power_reading'>power_reading</span> <span class='op'>=</span> <span class='ivar'>@xml</span><span class='period'>.</span><span class='id identifier rubyid_xpath'>xpath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>//XMLdata//info8_IPDP</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_ipdp'>ipdp</span><span class='embexpr_end'>}</span><span class='tstring_content'>_eg</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_eg'>eg</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
+        <span class='comment'>#$stderr.puts &quot;Power Reading Phase #{ipdp} Socket #{eg} Energy #{power_reading}KJ&quot;
+</span>        <span class='id identifier rubyid_power_total'>power_total</span> <span class='op'>+=</span> <span class='id identifier rubyid_power_reading'>power_reading</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_power_total'>power_total</span><span class='op'>/</span><span class='float'>3600.0</span>
+    
+  <span class='kw'>rescue</span> <span class='comment'>#If something is wrong with the data
+</span>    <span class='kw'>return</span> <span class='float'>0.0</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_power_usage-instance_method">
+  
+    - (<tt>Float</tt>) <strong>current_power_usage</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>retrieve the current power usage (point in time)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Power being used in KW</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rlib/pdu43V6145.rb', line 57</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_current_power_usage'>current_power_usage</span>
+  <span class='kw'>begin</span>
+    <span class='id identifier rubyid_power_being_used'>power_being_used</span> <span class='op'>=</span> <span class='float'>0.0</span>
+
+    <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>3</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ipdp'>ipdp</span><span class='op'>|</span>
+      <span class='lparen'>(</span><span class='int'>1</span><span class='op'>..</span><span class='int'>4</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ap'>ap</span><span class='op'>|</span>
+        <span class='id identifier rubyid_power_reading'>power_reading</span> <span class='op'>=</span> <span class='ivar'>@xml</span><span class='period'>.</span><span class='id identifier rubyid_xpath'>xpath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>//XMLdata//info8_IPDP</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_ipdp'>ipdp</span><span class='embexpr_end'>}</span><span class='tstring_content'>_ap</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_ap'>ap</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
+        <span class='id identifier rubyid_power_being_used'>power_being_used</span> <span class='op'>+=</span> <span class='id identifier rubyid_power_reading'>power_reading</span> <span class='comment'>#in Watts
+</span>      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>return</span> <span class='id identifier rubyid_power_being_used'>power_being_used</span><span class='op'>/</span><span class='float'>1000.0</span> <span class='comment'>#in KW
+</span>
+  <span class='kw'>rescue</span> <span class='comment'>#If something is wrong with the data
+</span>    <span class='kw'>return</span> <span class='float'>0.0</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="current_temperature-instance_method">
+  
+    - (<tt>Float</tt>) <strong>current_temperature</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>retrieve the current temperature from the sensor attached to the PDU
+(assuming there is one)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Temperature in C, though the PDU can be told to use F.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'rlib/pdu43V6145.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_current_temperature'>current_temperature</span>
+  <span class='kw'>begin</span>
+    <span class='kw'>return</span> <span class='ivar'>@xml</span><span class='period'>.</span><span class='id identifier rubyid_xpath'>xpath</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>//XMLdata//ibmsys_envstat_tempature</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_content'>content</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>  
+  <span class='kw'>rescue</span> <span class='comment'>#If something is wrong with the data
+</span>    <span class='kw'>return</span> <span class='float'>0.0</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Jun  3 15:14:11 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.2.2).
+</div>
+
+  </body>
+</html>
