@@ -25,7 +25,7 @@ class Gather_temperature
           $stderr.puts "Host[#{i}] == nil in Rack #{rack_name}"
           @results[rack_name] << 0
         elsif host.class != Pan_host
-          $stderr.puts "Host[#{i}] != Pan_host in Rack #{rack_name}"
+          $stderr.puts "Host[#{i}] not a Pan_host record: Rack #{rack_name}"
           @results[rack_name] << 0
         else 
           if i != 0 #No racks have U == 0, so we ignore these. 
