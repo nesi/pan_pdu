@@ -13,7 +13,7 @@
 #
 /usr/local/bin/yard doc *.rb rlib/*.rb power/*.rb temperature/*.rb --output-dir docs #Generate the documentation.
 
-cp -r docs/* ../doc #This is the git repo with the documentation branch checked out.
+cp -r docs/* ../docs #This is the git repo with the documentation branch checked out.
 rm -rf docs/* #We clean out the local copy of the docs, so the next run doesn't have stray files in it.
-( cd ../doc; git add . ; git commit -a --allow-empty-message -m ""; git push origin gh-pages ) #Check in the doc branch.
+( cd ../docs; git add . ; git commit -a --allow-empty-message -m ""; git push origin gh-pages ) #Check in the doc branch.
 
