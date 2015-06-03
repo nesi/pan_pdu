@@ -1,0 +1,10 @@
+conf/
+tmp/
+docs/
+.yardoc/
+.DS_Store
+generators/.DS_Store
+rlib/.DS_Store
+web/.DS_Store
+web/power/.DS_Store
+web/temperature/.DS_Store

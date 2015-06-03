@@ -1,0 +1,197 @@
+<!DOCTYPE html >
+<html>
+<head>    
+    <title>TDC NeSI Pan Pod Temperature Heatmap</title>
+
+    <script src="/rgraph/libraries/RGraph.common.core.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.dynamic.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.tooltips.js" ></script>
+    <script src="/rgraph/libraries/RGraph.drawing.rect.js" ></script>
+    <script src="/rgraph/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="/rgraph/excanvas/excanvas.js"></script><![endif]-->
+    
+    
+    <meta name="robots" content="noindex,nofollow" />
+<style>
+.rack th,td{ border: 1px solid grey; cellpadding: 0px; }
+.aisle td{ border: 0px; cellpadding: 0px; }
+</style>
+
+     
+</head>
+<body>
+        
+    <h1>TDC NeSI Pan Pod Temperature Heatmap</h1>
+    <table >
+      <tr class="rack">
+          <th width="72" >Test</th>
+          <th width="72"  >Chiller</th>
+          <th colspan="2" width="146"  >Blank</th>
+          <th width="72"  >Chiller</th>
+          <th colspan="2" width="146"  >B Rack</th>
+          <th width="72"  >C2</th>
+          <th width="72"  >Chiller</th>
+          <th colspan="2" width="146"  >A Rack</th>
+          <th width="72"  >Chiller</th>
+          <th width="72"  >A2</th>
+      </tr>
+      <tr class="rack">
+          <th width="72"  >O18</th>
+          <th width="72"  >N18</th>
+          <th width="72"  >L18</th>
+          <th width="72"  >K18</th>
+          <th width="72"  >J18</th>
+          <th width="72"  >I18</th>
+          <th width="72"  >H18</th>
+          <th width="72"  >G18</th>
+          <th width="72"  >F18</th>
+          <th width="72"  >E18</th>
+          <th width="72"  >D18</th>
+          <th width="72"  >C18</th>
+          <th width="72"  >B18</th>
+      </tr>
+    <tr class="aisle"><td colspan="13" ><canvas id="cvs18" width="1014" height="386">[No canvas support]</canvas></td></tr>
+    <tr class="rack">
+        <th width="72"  >Test</th>
+        <th width="72"  >Chiller</th>
+        <th colspan="2" width="146"  >E Rack</th>
+        <th width="72"  >Chiller</th>
+        <th colspan="2" width="146"  >C Rack</th>
+        <th width="72"  >C4</th>
+        <th width="72"  >Chiller</th>
+        <th colspan="2" width="146"  >D Rack</th>
+        <th width="72"  >Chiller</th>
+        <th width="72"  >A3</th>
+    </tr>
+    <tr class="rack">
+        <th width="72"  >O15</th>
+        <th width="72"  >N15</th>
+        <th width="72"  >L15</th>
+        <th width="72"  >K15</th>
+        <th width="72"  >J15</th>
+        <th width="72"  >I15</th>
+        <th width="72"  >H15</th>
+        <th width="72"  >G15</th>
+        <th width="72"  >F15</th>
+        <th width="72"  >E15</th>
+        <th width="72"  >D15</th>
+        <th width="72"  >C15</th>
+        <th width="72"  >B15</th>
+    </tr>
+    <tr class="aisle"><td colspan="13" ><canvas id="cvs15" width="1014" height="386">[No canvas support]</canvas></td></tr>
+    </table>
+
+<script>
+
+  $(document).ready(function ()
+  {
+
+    function myAJAXCallback(data)
+    {
+      var delay=300000;
+      myAJAXCallback_action(data);
+      // Make another AJAX call after the delay (which is in milliseconds)
+      setTimeout(function () { RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json', myAJAXCallback); }, delay);
+    }
+
+    /**
+    * Make the AJAX call every so often (contolled by the delay variable)
+    */
+    setTimeout(function () {RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json', myAJAXCallback);}, 0);
+    
+    
+    function set_color(rect, node_name, temperature) {
+      var pallette= [ 
+      0x000000, 0x0000FF, 0x0033FF, 0x3366FF, 0x0099FF, 0x00CCFF, 0x00FFFF, 0x00FFCC, 0x00FF99, 0x00FF66, 
+      0x00FF33, 0x00FF00, 0x33FF00, 0x66FF00, 0x99FF00, 0xCCFF00, 0xFFFF00, 0xFFFF22, 0xFFFF66, 0xFFEE66,  
+      0xFFDD66, 0xFFCC66, 0xFFBB00, 0xFFAA00, 0xFF9900, 0xFF9933, 0xFF6633, 0xFF6600, 0xFF5500, 0xFF3300, 
+      0xFF3333, 0xFF0033, 0xFF0022, 0xFF0020, 0xFF0019, 0xFF0018, 0xFF0017, 0xFF0016, 0xFF0015, 0xFF0014,
+      0xFF0013, 0xFF0012, 0xFF0011, 0xFF0009, 0xFF0008, 0xFF0007, 0xFF0006, 0xFF0005, 0xFF0004, 0xFF0000 ];
+      var r_color = ((pallette[temperature] >> 16) & 0xFF);
+      var g_color = ((pallette[temperature] >> 8) & 0xFF);
+      var b_color = (pallette[temperature] & 0xFF);
+      rect.set({
+          fillstyle: "rgb("+r_color+","+g_color+","+b_color+")",
+          tooltips: [ node_name + ' ' + temperature + 'C' ]
+       })
+     }        
+
+     
+    function get_data(values, y) {
+      if(values == null) {
+        return 0;
+      }
+      return values[y];
+    }
+
+    function myAJAXCallback_action(data) {
+      var racks =   ['O','N','L','K','J','I','H','G','F','E','D','C','B'];
+      var chiller = [ 0,  1,  0,  0,  1,  0,  0,  0,  1,  0,  0,  1,  0];
+      var width = 78;
+      var height = 8;
+
+      for (var x=0; x<13 ; ++x) { //Rack in TDC Pod
+          var values = eval("data." + racks[x] + '18');
+          for (var y=0; y<48; ++y) { //U in rack 
+              var rect = new RGraph.Drawing.Rect({
+                  id: 'cvs18',
+                  x: x*width,
+                  y: (47-y)*height,
+                  width: width,
+                  height: height,
+                  options: {
+                      strokestyle: 'rgba(0,0,0,0.0)'
+                  }
+              })
+
+              if(chiller[x] == 1) {
+                if(y < 43) {
+                  set_color(rect,'Chiller', 18 );
+                } else {
+                  set_color(rect,'blank', 0);
+                }
+              } else if(x >3) {
+                set_color(rect,racks[x]+'18-U'+(y+1), get_data(values,y) );
+              } else {
+                set_color(rect,racks[x]+'18-U'+(y+1),0 );
+              }
+              rect.draw();
+          }
+      }
+    
+      for (var x=0; x<13 ; ++x) { //Rack in TDC Pod
+        var values = eval("data." + racks[x] + '15');
+          for (var y=0; y<48; ++y) { //U in rack 
+              var rect = new RGraph.Drawing.Rect({
+                  id: 'cvs15',
+                  x: x*width,
+                  y: (47-y)*height,
+                  width: width,
+                  height: height,
+                  options: {
+                      strokestyle: 'rgba(0,0,0,0.0)'
+                  }
+              })
+
+              if(chiller[x] == 1) {
+                if(y < 43) {
+                  set_color(rect,'Chiller', 18 );
+                } else {
+                  set_color(rect,'blank', 0);
+                }
+              } else if(x >1) {
+                set_color(rect,racks[x]+'15-U'+(y+1), get_data(values,y) );
+              } else {
+                set_color(rect,racks[x]+'15-U'+(y+1),0 );
+              }
+              rect.draw();
+          }
+      }
+    }
+  })
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Aisle Temperature</title>
+<script src="/rgraph/libraries/RGraph.common.core.js" ></script>
+<script src="/rgraph/libraries/RGraph.common.dynamic.js" ></script>
+<script src="/rgraph/libraries/RGraph.common.effects.js" ></script>
+<script src="/rgraph/libraries/RGraph.gauge.js" ></script>
+<script src="/rgraph/jquery.min.js"></script>
+<!--[if lt IE 9]><script src="/rgraph/excanvas/excanvas.js"></script><![endif]-->
+
+<meta name="robots" content="noindex,nofollow" />
+<meta name="description" content="Cluster Aisle Temperature" />
+<style>
+.rack td{ border: 1px solid grey; }
+.aisle td{ border: 0px; }
+</style>
+</head>
+<body>
+<table border="0">
+<tr><th align="center" width="72px" >O18</th><th align="center" width="72px" >M18</th><th align="center" width="72px" >L18</th><th align="center" width="72px" >K18</th><th align="center" width="72px" >J18</th><th align="center" width="72px" >I18</th><th align="center" width="72px" >H18</th><th align="center" width="72px" >G18</th><th align="center" width="72px" >F18</th><th align="center" width="72px" >E18</th><th align="center" width="72px" >D18</th><th align="center" width="72px" >C18</th><th align="center" width="72px" >B18</th><th align="center" width="36px" >A18</th></tr>
+
+<tr class="rack"><td align="center" height="72px" width="72px" >Test</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px" >Free</td><td align="center" height="72px" width="72px" >Free</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#0066FF" colspan="2">B Rack</td><td align="center" height="72px" width="72px"  bgcolor="#FFD1A3">IBM C2</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#0066FF" colspan="2">A Rack</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#FFD1A3">IBM A2</td></tr>
+
+<tr class="aisle">
+<td align="center" height="74px" width="74px" ><canvas id="tdc_o18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_m18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_k18"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_j18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_h18"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_g18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_f18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_d18"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_c18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_b18"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="36px" bgcolor="orange" >A<br>PWR</td></tr>
+
+<tr class="aisle">
+<td align="center" height="74px" width="74px" ><canvas id="tdc_o15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_m15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_k15"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_j15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_h15"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_g15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_f15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="150px" colspan="2"><canvas id="tdc_d15"  width="150" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_c15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="74px" ><canvas id="tdc_b15"  width="74" height="74">[No canvas support]</canvas></td>
+<td align="center" height="74px" width="36px" bgcolor="orange" >B<br>PWR</td></tr>
+
+<tr class="rack"><td align="center" height="72px" width="72px" >Test</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#0066FF" colspan="2">E Rack</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#0066FF" colspan="2">C Rack</td><td align="center" height="72px" width="72px"  bgcolor="#FFD1A3">IBM C4</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#0066FF" colspan="2">D Rack</td><td align="center" height="72px" width="72px"  bgcolor="#66FFCC">Chiller</td><td align="center" height="72px" width="72px"  bgcolor="#FFD1A3">IBM A3</td></tr>
+
+<tr><th align="center" width="72px" >O15</th><th align="center" width="72px" >M15</th><th align="center" width="72px" >L15</th><th align="center" width="72px" >K15</th><th align="center" width="72px" >J15</th><th align="center" width="72px" >I15</th><th align="center" width="72px" >H15</th><th align="center" width="72px" >G15</th><th align="center" width="72px" >F15</th><th align="center" width="72px" >E15</th><th align="center" width="72px" >D15</th><th align="center" width="72px" >C15</th><th align="center" width="72px" >B15</th><th align="center" width="36px" >A15</th></tr>
+
+<script>
+var pallette= [ 0x000000, 0x0000FF, 0x0033FF, 0x3366FF, 0x0099FF, 0x00CCFF, 0x00FFFF, 0x00FFCC, 0x00FF99, 0x00FF66, 
+                0x00FF33, 0x00FF00, 0x33FF00, 0x66FF00, 0x99FF00, 0xCCFF00, 0xFFFF00, 0xFFFF22, 0xFFFF66, 0xFFEE66,  
+                0xFFDD66, 0xFFCC66, 0xFFBB00, 0xFFAA00, 0xFF9900, 0xFF9933, 0xFF6633, 0xFF6600, 0xFF5500, 0xFF3300, 
+                0xFF3333, 0xFF0033, 0xFF0022, 0xFF0020, 0xFF0019, 0xFF0018, 0xFF0017, 0xFF0016, 0xFF0015, 0xFF0014,
+                0xFF0013, 0xFF0012, 0xFF0011, 0xFF0009, 0xFF0008, 0xFF0007, 0xFF0006, 0xFF0005, 0xFF0004, 0xFF0000 ];
+
+
+
+function set_top(ctx, canvas, i) {
+   var r_color = ((pallette[i] >> 16) & 0xFF);
+   var g_color = ((pallette[i] >> 8) & 0xFF);
+   var b_color = (pallette[i] & 0xFF);
+   //ctx.fillStyle="rgb("+r_color+","+g_color+","+b_color+")";
+    gradient = ctx.createRadialGradient(canvas.width/2, 0, 3, canvas.width/2, 0, canvas.height)
+    gradient.addColorStop(0,"rgb("+r_color+","+g_color+","+b_color+")");
+    gradient.addColorStop(1,"white");    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0,0,canvas.width,canvas.height); // 0 = one row
+    ctx.font        = "normal 24px Arial";
+    ctx.fillStyle = "#000000";
+    ctx.strokeStyle = "#000000";
+    ctx.textAlign = "center";
+    ctx.fillText(i, canvas.width/2, 30);
+}
+function set_bottom(ctx, canvas, i) {
+   var r_color = ((pallette[i] >> 16) & 0xFF);
+   var g_color = ((pallette[i] >> 8) & 0xFF);
+   var b_color = (pallette[i] & 0xFF);
+   //ctx.fillStyle="rgb("+r_color+","+g_color+","+b_color+")";
+    gradient = ctx.createRadialGradient(canvas.width/2, canvas.height, 3, canvas.width/2, canvas.height, canvas.height)
+    gradient.addColorStop(0,"rgb("+r_color+","+g_color+","+b_color+")");
+    gradient.addColorStop(1,"white");    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0,0,canvas.width,canvas.height); // 0 = one row
+    ctx.font        = "normal 24px Arial";
+    ctx.fillStyle = "#000000";
+    ctx.strokeStyle = "#000000";
+    ctx.textAlign = "center";
+    ctx.fillText(i, canvas.width/2, canvas.height-5);
+}
+
+function set(data){
+  var canvas_tdc_o15 = document.getElementById('tdc_o15');
+  var canvas_tdc_k15 = document.getElementById('tdc_k15');
+  var canvas_tdc_h15 = document.getElementById('tdc_h15');
+  var canvas_tdc_g15 = document.getElementById('tdc_g15');
+  var canvas_tdc_d15 = document.getElementById('tdc_d15');
+  var canvas_tdc_b15 = document.getElementById('tdc_b15');
+  var canvas_tdc_o18 = document.getElementById('tdc_o18');
+  var canvas_tdc_k18 = document.getElementById('tdc_k18');
+  var canvas_tdc_h18 = document.getElementById('tdc_h18');
+  var canvas_tdc_g18 = document.getElementById('tdc_g18');
+  var canvas_tdc_d18 = document.getElementById('tdc_d18');
+  var canvas_tdc_b18 = document.getElementById('tdc_b18');
+
+  var ctx_tdc_o15 = canvas_tdc_o15.getContext('2d');
+  var ctx_tdc_k15 = canvas_tdc_k15.getContext('2d');
+  var ctx_tdc_h15 = canvas_tdc_h15.getContext('2d');
+  var ctx_tdc_g15 = canvas_tdc_g15.getContext('2d');
+  var ctx_tdc_d15 = canvas_tdc_d15.getContext('2d');
+  var ctx_tdc_b15 = canvas_tdc_b15.getContext('2d');
+  var ctx_tdc_o18 = canvas_tdc_o18.getContext('2d');
+  var ctx_tdc_k18 = canvas_tdc_k18.getContext('2d');
+  var ctx_tdc_h18 = canvas_tdc_h18.getContext('2d');
+  var ctx_tdc_g18 = canvas_tdc_g18.getContext('2d');
+  var ctx_tdc_d18 = canvas_tdc_d18.getContext('2d');
+  var ctx_tdc_b18 = canvas_tdc_b18.getContext('2d');
+
+  set_bottom(ctx_tdc_o15, canvas_tdc_o15, data[0] );
+  set_bottom(ctx_tdc_k15, canvas_tdc_k15, data[1] );
+  set_bottom(ctx_tdc_h15, canvas_tdc_h15, data[2] );
+  set_bottom(ctx_tdc_g15, canvas_tdc_g15, data[3] );
+  set_bottom(ctx_tdc_d15, canvas_tdc_d15, data[4] );
+  set_bottom(ctx_tdc_b15, canvas_tdc_b15, data[5] );
+
+  set_top(ctx_tdc_o18, canvas_tdc_o18, data[6] );
+  set_top(ctx_tdc_k18, canvas_tdc_k18, data[7] );
+  set_top(ctx_tdc_h18, canvas_tdc_h18, data[8] );
+  set_top(ctx_tdc_g18, canvas_tdc_g18, data[9] );
+  set_top(ctx_tdc_d18, canvas_tdc_d18, data[10] );
+  set_top(ctx_tdc_b18, canvas_tdc_b18, data[11] );
+}
+
+//tdc_o15_temp tdc_k15_temp tdc_h15_temp tdc_g15_temp tdc_d15_temp tdc_b15_temp
+//tdc_o18_temp tdc_k18_temp tdc_h18_temp tdc_g18_temp tdc_d18_temp tdc_b18_temp
+var initial_data = [0,0,0,0,0,0,  0,0,0,0,0,0];
+set(initial_data);
+
+var delay = 150000;
+
+function myAJAXCallback(data)
+{
+  set(data);
+  // Make another AJAX call after the delay (which is in milliseconds)
+  setTimeout(function () { RGraph.AJAX.getCSV('/pan/temperature/aisle_temp.csv', myAJAXCallback); }, delay);
+}
+
+/**
+* Make the AJAX call every so often (contolled by the delay variable)
+*/
+setTimeout(function () {RGraph.AJAX.getCSV('/pan/temperature/aisle_temp.csv', myAJAXCallback);}, 0);
+
+</script>
+</body>
+</html>

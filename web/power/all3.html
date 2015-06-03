@@ -1,0 +1,106 @@
+<!DOCTYPE html >
+<html>
+<head>
+<title>Pan Power</title>
+<meta name="robots" content="noindex,nofollow" />
+
+    <script src="/rgraph/libraries/RGraph.common.core.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.dynamic.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.effects.js" ></script>
+    <script src="/rgraph/libraries/RGraph.gauge.js" ></script>
+    <script src="/rgraph/libraries/RGraph.drawing.text.js" ></script>
+    <script src="/rgraph/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="/rgraph/excanvas/excanvas.js"></script><![endif]-->  
+
+    <script>
+        var gauges = [];
+        var delay = 180000;
+        var datafile;
+        
+        function setup_canvas (cvs, max_value, background_color, text_color, title, gtop,gleft,gbottom,gright )
+        {
+          var gauge_a1 = new RGraph.Gauge({
+                id: cvs , min:0, max: max_value, value: 0,
+                options: { 
+                          radius: (gright-gleft)/2-10,
+                          centerx: gleft + (gright-gleft)/2,
+                          centery: gtop + (gbottom-gtop)/2,
+                          value: { text: { self: true, y: { pos: 0.25 } }  },
+                          background: { color: background_color },
+                          text: { color: text_color },
+                          border: { outline: 'transparent' },
+                          needle: { colors: ['red'], type: 'line' },
+                          centerpin: { radius: 0.1 },
+                          title: { top: { self: title + '\nKW', color: text_color, pos: 0.1, size: 10}, },
+                          labels: { offset: 2 },
+                          tickmarks: { small: { color: text_color, num: 0 },
+                                       big: { color: text_color, num: 0 }
+                          }
+                }
+              }).on('draw', function (obj)
+            {
+                var co = obj.context;
+    
+                // This circle becomes the border of the centerpin
+                co.beginPath();
+                    co.fillStyle = '#aaa';
+                    //co.arc(obj.centerx, obj.centery, 10, 0, RGraph.TWOPI, false);
+                    co.arc(gleft + (gright-gleft)/2, gtop + (gbottom-gtop)/2, 8, 0, RGraph.TWOPI, false);
+                co.fill();
+            })
+            .draw();
+
+            window.gauges[window.gauges.length] = gauge_a1;
+        }
+
+        function myAJAXCallback(data)
+        {
+            for(var i=0; i < window.gauges.length; i++) {
+              window.gauges[i].value = data[i];
+              window.gauges[i].grow();
+            }
+               
+            // Make another AJAX call after the delay (which is in milliseconds)
+            setTimeout(function () {RGraph.AJAX.getCSV(window.datafile, myAJAXCallback);}, window.delay);
+        }
+        
+        function setup_ajax(data_file) {
+          /**
+          * Make the AJAX call every so often (contolled by the delay variable) '/pan/power/a1_kw.txt'
+          */
+          window.datafile = data_file;
+          setTimeout(function () {RGraph.AJAX.getCSV(window.datafile, myAJAXCallback);}, 0);
+        }
+    </script>
+     
+</head>
+<body>
+  <table>
+    <tr>
+      <td>
+        <canvas id="cvs" width="660" height="660">[No canvas support]</canvas>
+        <script>
+            $(document).ready(function ()
+            {
+              setup_canvas ('cvs', 40, 'white', 'black' , 'A Rack', 0,0,220,220);
+              setup_canvas ('cvs', 40, 'white', 'black' , 'B Rack', 0,220,220,440);
+              setup_canvas ('cvs', 40, 'white', 'black' , 'C Rack', 0,440,220,660);
+
+              setup_canvas ('cvs', 40, 'white', 'black' , 'D Rack', 220,0,440,220);
+              setup_canvas ('cvs', 40, 'white', 'black' , 'E Rack', 220,220,440,440);
+              setup_canvas ('cvs', 40, 'white', 'black' , 'A2 Rack', 220,440,440,660);
+
+              setup_canvas ('cvs', 40, 'white', 'black' , 'A3 Rack', 440,0,660,220);
+              setup_canvas ('cvs', 40, 'white', 'black' , 'C2 Rack', 440,220,660,440);
+              setup_canvas ('cvs', 200, 'black', 'white' , 'Total',  440,440,660,660);
+              
+              setup_ajax('/pan/power/all_kw.txt');
+ 
+          })
+        </script>
+      </td>
+    </tr>
+  </tr>
+</table> 
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <link rel="stylesheet" href="demos.css" type="text/css" media="screen" />
+    
+    <script src="/rgraph/libraries/RGraph.common.core.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.dynamic.js" ></script>
+    <script src="/rgraph/libraries/RGraph.common.effects.js" ></script>
+    <script src="/rgraph/libraries/RGraph.gauge.js" ></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="/rgraph/excanvas/excanvas.js"></script><![endif]-->
+    
+    <title>A customised and adjustable Gauge chart</title>
+
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="description" content="A Gauge chart that is updated periodically by AJAX" />
+     
+</head>
+<body>
+<h2>C2 Rack (IS5200)</h2>
+    <canvas id="cvs_c2" width="250" height="250">[No canvas support]</canvas>
+    
+    <script>
+        $(document).ready(function ()
+        {
+            gauge_c2 = new RGraph.Gauge({
+                id: 'cvs_c2',
+                min:0,
+                max: 40,
+                value: 0,
+                options: {
+                    value: {
+                      text: {
+                            self: true
+                      }
+                    },
+
+                    border: {
+                        outline: 'transparent'
+                    },
+                    needle: {
+                        colors: ['red'],
+                        type: 'line'
+                    },
+                    centerpin: {
+                        radius: 0.1
+                    },
+                    title: {
+                        top: 'KW'
+                    },
+                    labels: {
+                        offset: 7
+                    }
+                }
+            }).on('draw', function (obj)
+            {
+                var co = obj.context;
+    
+                // This circle becomes the border of the centerpin
+                co.beginPath();
+                    co.fillStyle = '#aaa';
+                    co.arc(obj.centerx, obj.centery, 10, 0, RGraph.TWOPI, false);
+                co.fill();
+            })
+            .draw();
+
+            var delay = 150000;
+
+            function myAJAXCallback_c2(num)
+            {
+                gauge_c2.value = num;
+                gauge_c2.grow()
+                
+                
+                // Make another AJAX call after the delay (which is in milliseconds)
+                setTimeout(function ()
+                    {
+                        RGraph.AJAX.getNumber('/pan/power/c2_kw.txt', myAJAXCallback_c2);
+                    },
+                    delay);
+            }
+
+
+
+
+            /**
+            * Make the AJAX call every so often (contolled by the delay variable)
+            */
+            setTimeout(function () {RGraph.AJAX.getNumber('/pan/power/c2_kw.txt', myAJAXCallback_c2);}, 0);
+        })
+    </script>
+
+    
+</body>
+</html>
