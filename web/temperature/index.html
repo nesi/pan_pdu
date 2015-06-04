@@ -147,13 +147,13 @@ function myAJAXCallback(data)
 {
   set(data);
   // Make another AJAX call after the delay (which is in milliseconds)
-  setTimeout(function () { RGraph.AJAX.getCSV('/pan/temperature/aisle_temp.csv', myAJAXCallback); }, delay);
+  setTimeout(function () { RGraph.AJAX.getJSON('/pan/temperature/aisle_temp.json', myAJAXCallback); }, delay);
 }
 
 /**
 * Make the AJAX call every so often (contolled by the delay variable)
 */
-setTimeout(function () {RGraph.AJAX.getCSV('/pan/temperature/aisle_temp.csv', myAJAXCallback);}, 0);
+setTimeout(function () {RGraph.AJAX.getJSON('/pan/temperature/aisle_temp.json', myAJAXCallback);}, 0);
 
 </script>
 </body>
