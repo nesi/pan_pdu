@@ -91,13 +91,13 @@
       var delay=300000;
       myAJAXCallback_action(data);
       // Make another AJAX call after the delay (which is in milliseconds)
-      setTimeout(function () { RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json', myAJAXCallback); }, delay);
+      setTimeout(function () { RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json' + "?timestamp="+ Date.now(), myAJAXCallback); }, delay);
     }
 
     /**
     * Make the AJAX call every so often (contolled by the delay variable)
     */
-    setTimeout(function () {RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json', myAJAXCallback);}, 0);
+    setTimeout(function () {RGraph.AJAX.getJSON('/pan/temperature/rack_temperature.json' + "?timestamp="+ Date.now(), myAJAXCallback);}, 0);
     
     
     function set_color(rect, node_name, temperature) {
