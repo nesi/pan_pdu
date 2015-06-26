@@ -54,14 +54,14 @@
                 // Make another AJAX call after the delay (which is in milliseconds)
                 setTimeout(function ()
                     {
-                        RGraph.AJAX.getNumber(data_file, myAJAXCallback);
+                        RGraph.AJAX.getNumber(data_file + "?timestamp="+ Date.now(), myAJAXCallback);
                     },
                     delay);
             }
             /**
             * Make the AJAX call every so often (contolled by the delay variable) '/pan/power/a1_kw.txt'
             */
-            setTimeout(function () {RGraph.AJAX.getNumber(data_file, myAJAXCallback);}, 0);
+            setTimeout(function () {RGraph.AJAX.getNumber(data_file + "?timestamp="+ Date.now(), myAJAXCallback);}, 0);
 
         }
     </script>
