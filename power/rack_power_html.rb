@@ -10,9 +10,9 @@ require_relative '../rlib/upload.rb'
 #Save the power value or values to a file.
 # @param file [String] Name of the target file
 # @param value [Numeric,Array<Numeric>] Either a number, or an array of numbers
-def save(file,value)
-  web_base = @config.html_directory + '/../' + @config.html_power_directory
-  File.open("#{web_base}/#{file}", "w") do |fd|
+def save(filename,value)
+  web_base = @config.html_directory + '/' + @config.html_power_directory
+  File.open("#{web_base}/#{filename}", "w") do |fd|
     if value.class == Array
       fd.puts "#{value[0]}" if value.length > 0
       (1...value.length).each { |i| fd.puts ",#{value[i]}" }
@@ -20,8 +20,26 @@ def save(file,value)
       fd.puts value
     end
   end
-  Upload::upload_file("#{web_base}/#{file}", "#{@config.remote_html_directory}/#{@config.remote_html_power_directory}/#{file}", @config.remote_www_server, @auth.transfer_ssh_keyfile)
+  Upload::upload_file("#{web_base}/#{filename}", "#{@config.remote_html_directory}/#{@config.remote_html_power_directory}/#{filename}", @config.remote_www_server, @auth.transfer_ssh_keyfile)
 end
+
+#Save the power value or values to a file.
+# @param file [String] Name of the target file
+# @param value [Hash<String=>Numeric>] Either a number, or an array of numbers
+def to_json(filename,value)
+  web_base = @config.html_directory + '/' + @config.html_power_directory
+  if value.class == Hash
+    File.open("#{web_base}/#{filename}", "w") do |fd|
+      fd.puts "{ 'datetime': '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}',\n  'state': {"
+      value.each do |k,v|
+        fd.puts "    '#{k}': #{v},"
+      end
+      fd.puts "    'end': ''\n  }\n}"
+    end
+    Upload::upload_file("#{web_base}/#{filename}", "#{@config.remote_html_directory}/#{@config.remote_html_power_directory}/#{filename}", @config.remote_www_server, @auth.transfer_ssh_keyfile)
+  end
+end
+
 
 
 current_power_usage = 0;
@@ -151,4 +169,6 @@ current_power_usage += c4_watts
 #puts
 save("total_kw.txt", current_power_usage) 
 save("all_kw.txt", [a1_watts, b1_watts, c1_watts, d1_watts, e1_watts, a2_watts, a3_watts, c2_watts, c4_watts, current_power_usage])
+to_json("current_kw.json", {'a1_kw'=>a1_watts, 'b1_kw'=>b1_watts, 'c1_kw'=>c1_watts, 'd1_kw'=>d1_watts, 'e1_kw'=>e1_watts, 
+                        'a2_kw'=>a2_watts, 'a3_kw'=>a3_watts, 'c2_kw'=>c2_watts, 'c4_kw'=>c4_watts, 'total_kw'=>current_power_usage})
 

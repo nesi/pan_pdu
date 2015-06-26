@@ -24,6 +24,23 @@ def save(file,value)
   Upload::upload_file("#{web_base}/#{file}", "#{@config.remote_html_directory}/#{@config.remote_html_power_directory}/#{file}", @config.remote_www_server, @auth.transfer_ssh_keyfile)
 end
 
+#Save the power value or values to a file.
+# @param file [String] Name of the target file
+# @param value [Hash<String=>Numeric>] Either a number, or an array of numbers
+def to_json(filename,value)
+  web_base = @config.html_directory + '/' + @config.html_power_directory
+  if value.class == Hash
+    File.open("#{web_base}/#{filename}", "w") do |fd|
+      fd.puts "{ 'datetime': '#{Time.now.strftime('%Y-%m-%d %H:%M:%S')}',\n  'state': {"
+      value.each do |k,v|
+        fd.puts "    '#{k}': #{v},"
+      end
+      fd.puts "    'end': ''\n  }\n}"
+    end
+    Upload::upload_file("#{web_base}/#{filename}", "#{@config.remote_html_directory}/#{@config.remote_html_power_directory}/#{filename}", @config.remote_www_server, @auth.transfer_ssh_keyfile)
+  end
+end
+
 accumulated_power_used = 0;
 #
 #A1 idataplex
@@ -152,3 +169,6 @@ save("total_kwh.txt", accumulated_power_used)
 save("all_kwh.txt", [a1_watts, b1_watts, c1_watts, d1_watts, e1_watts, a2_watts, a3_watts, c2_watts, c4_watts, accumulated_power_used])
 
 puts "#{Time.now.iso8601}\t#{a1_watts}\t#{b1_watts}\t#{c1_watts}\t#{d1_watts}\t#{e1_watts}\t#{a2_watts}\t#{a3_watts}\t#{c2_watts}\t#{c4_watts}\t#{accumulated_power_used}"
+
+to_json("accumulated_kwh.json", {'a1_kwh'=>a1_watts, 'b1_kwh'=>b1_watts, 'c1_kwh'=>c1_watts, 'd1_kwh'=>d1_watts, 'e1_kwh'=>e1_watts, 
+                        'a2_kwh'=>a2_watts, 'a3_kwh'=>a3_watts, 'c2_kwh'=>c2_watts, 'c4_kwh'=>c4_watts, 'total_kwh'=>accumulated_power_used})
